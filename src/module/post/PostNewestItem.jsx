@@ -10,7 +10,7 @@ const PostNewestItemStyles = styled.div`
   gap: 20px;
   margin-bottom: 28px;
   padding-bottom: 28px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
   &:last-child {
     padding-bottom: 0;
     margin-bottom: 0;
@@ -27,8 +27,21 @@ const PostNewestItemStyles = styled.div`
     &-category {
       margin-bottom: 8px;
     }
+    &-content {
+      flex: 1;
+    }
     &-title {
       margin-bottom: 8px;
+    }
+  }
+  @media screen and (max-width: 1023.98px) {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    .post {
+      &-image {
+        width: 140px;
+        height: 100px;
+      }
     }
   }
 `;
@@ -37,8 +50,10 @@ const PostNewestItem = () => {
     <PostNewestItemStyles>
       <PostImage
         url="https://images.unsplash.com/photo-1510519138101-570d1dca3d66?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2294&q=80"
-        alt="" to="/"
+        alt=""
+        to="/"
       ></PostImage>
+
       <div className="post-content">
         <PostCategory type="secondary">Kiến thức</PostCategory>
         <PostTitle>

@@ -19,8 +19,12 @@ const PostCatogoryStyles = styled.div`
     css`
       background-color: white;
     `}
+  white-space: nowrap;
   a{
     display: block;
+  }
+  @media screen and (max-width: 1023.98px) {
+    font-size: 10px;
   }
 `;
 const PostCategory = ({

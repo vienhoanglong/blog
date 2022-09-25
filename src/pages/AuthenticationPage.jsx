@@ -1,6 +1,7 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+
 const AuthenticationPageStyles = styled.div`
   min-height: 100vh;
   padding: 40px;
@@ -18,27 +19,30 @@ const AuthenticationPageStyles = styled.div`
     max-width: 600px;
     margin: 0 auto;
   }
-  .have-account{
+  .have-account {
     margin-bottom: 20px;
-    a{
+    a {
       display: inline-block;
-      color: ${(props)=> props.theme.primary};
-      font-weight: 600;
+      color: ${(props) => props.theme.primary};
+      font-weight: 500;
     }
   }
-`
-const AuthenticationPage = ({children}) => {
+`;
+
+const AuthenticationPage = ({ children }) => {
   return (
     <AuthenticationPageStyles>
       <div className="container">
-        <NavLink to="/">
-          <img srcSet="/logo.png 2x" alt="monkey-blogging" className="logo" />
-        </NavLink>
+        <div className="text-center">
+          <NavLink to="/" className="inline-block">
+            <img srcSet="/logo.png 2x" alt="monkey-blogging" className="logo" />
+          </NavLink>
+        </div>
         <h1 className="heading">Monkey Blogging</h1>
         {children}
       </div>
     </AuthenticationPageStyles>
-  )
-}
+  );
+};
 
-export default AuthenticationPage
+export default AuthenticationPage;

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { Label } from "components/label";
 import { Input } from "components/input";
+import { Label } from "components/label";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Field } from "components/field";
 import { Button } from "components/button";
@@ -13,6 +13,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import AuthenticationPage from "./AuthenticationPage";
 import InputPasswordToggle from "components/input/InputPasswordToggle";
+
 const schema = yup.object({
   fullname: yup.string().required("Please enter your fullname"),
   email: yup
@@ -21,25 +22,22 @@ const schema = yup.object({
     .required("Please enter your email address"),
   password: yup
     .string()
-    .min(8, "Your password must be at least 8 character or greater")
+    .min(8, "Your password must be at least 8 characters or greater")
     .required("Please enter your password"),
 });
+
 const SignUpPage = () => {
   const navigate = useNavigate();
   const {
     control,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
-    watch,
-    reset,
-  } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+  });
   const handleSignUp = async (values) => {
     if (!isValid) return;
-    // return new Promise((resolve)=>{
-    //   setTimeout(()=>{
-    //     resolve()
-    //   }, 5000)
-    // })
     await createUserWithEmailAndPassword(auth, values.email, values.password);
     await updateProfile(auth.currentUser, {
       displayName: values.fullname,
@@ -54,9 +52,12 @@ const SignUpPage = () => {
     navigate("/");
   };
   useEffect(() => {
-    const arrErrors = Object.values(errors);
-    if (arrErrors.length > 0) {
-      toast.error(arrErrors[0]?.message, { pauseOnHover: false, delay: 10 });
+    const arrErroes = Object.values(errors);
+    if (arrErroes.length > 0) {
+      toast.error(arrErroes[0]?.message, {
+        pauseOnHover: false,
+        delay: 0,
+      });
     }
   }, [errors]);
   useEffect(() => {
@@ -72,9 +73,8 @@ const SignUpPage = () => {
         <Field>
           <Label htmlFor="fullname">Fullname</Label>
           <Input
-            autoComplete="off"
-            name="fullname"
             type="text"
+            name="fullname"
             placeholder="Enter your fullname"
             control={control}
           />
@@ -82,10 +82,9 @@ const SignUpPage = () => {
         <Field>
           <Label htmlFor="email">Email address</Label>
           <Input
-            autoComplete="off"
-            name="email"
             type="email"
-            placeholder="Enter your email address"
+            name="email"
+            placeholder="Enter your email"
             control={control}
           />
         </Field>
@@ -97,9 +96,12 @@ const SignUpPage = () => {
           You already have an account? <NavLink to={"/sign-in"}>Login</NavLink>{" "}
         </div>
         <Button
-          kind="primary"
           type="submit"
-          style={{ width: "100%", maxWidth: 350, margin: "0 auto" }}
+          style={{
+            width: "100%",
+            maxWidth: 300,
+            margin: "0 auto",
+          }}
           isLoading={isSubmitting}
           disabled={isSubmitting}
         >
